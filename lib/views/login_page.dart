@@ -16,49 +16,57 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final databaseHelper = DatabaseHelper();
 
-  void register() async {
-    if (formKey.currentState!.validate()) {
-      await databaseHelper.insertUser(
-        emailController.text,
-        passwordController.text,
-      );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuário registrado com sucesso')),
-      );
-    }
-  }
+  // void register() async {
+  //   if (formKey.currentState!.validate()) {
+  //     await databaseHelper.insertUser(
+  //       emailController.text,
+  //       passwordController.text,
+  //     );
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Usuário registrado com sucesso')),
+  //     );
+  //   }
+  // }
 
-  void login() async {
-    if (formKey.currentState!.validate()) {
-      final user = await databaseHelper.getUser(emailController.text);
-      if (user != null && user['password'] == passwordController.text) {
+void login() async {
+  if (formKey.currentState!.validate()) {
+    try {
+      final user = await databaseHelper.getUserByEmail(emailController.text);
+
+      if (user != null && user.password == passwordController.text) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => IMCPage(email: emailController.text),
+            builder: (context) => IMCPage(name: user.name),
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid Email or Password')),
+          const SnackBar(content: Text('Email ou senha inválidos')),
         );
       }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao acessar o banco de dados: $e')),
+      );
     }
   }
+}
 
-  void limpaCampos() {
-    emailController.clear();
-    passwordController.clear();
-  }
 
-  void printAllUsers() async {
-    final users = await databaseHelper.getAllUsers();
-    for (var user in users) {
-      if (kDebugMode) {
-        print('User: ${user['email']}, Password: ${user['password']}');
-      }
-    }
-  }
+  // void limpaCampos() {
+  //   emailController.clear();
+  //   passwordController.clear();
+  // }
+
+  // void printAllUsers() async {
+  //   final users = await databaseHelper.getAllUsers();
+  //   for (var user in users) {
+  //     if (kDebugMode) {
+  //       print('User: ${user['email']}, Password: ${user['password']}');
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -153,32 +161,13 @@ class _LoginPageState extends State<LoginPage> {
                             width:
                                 20), //configuração para espaçamento usando .center
                         ElevatedButton(
-                          onPressed: register,
-                          child: const Text('Cadastrar'),
-                        ),
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
-                        ElevatedButton(
                           onPressed: login,
                           child: const Text('Login'),
-                        ),
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
-                        ElevatedButton(
-                          onPressed: limpaCampos,
-                          child: const Text('Clear'),
                         ),
                       ],
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: printAllUsers,
-                child: const Text('Print All Users'),
               ),
             ],
           ),

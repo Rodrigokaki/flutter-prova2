@@ -3,8 +3,12 @@ import '../styles/styles.dart';
 import '../constants/constants.dart';
 
 class IMCPage extends StatefulWidget {
+  final String name;
+
+  const IMCPage({super.key, required this.name});
+
   @override
-  _IMCPageState createState() => _IMCPageState();
+  State<IMCPage> createState() => _IMCPageState();
 }
 
 class _IMCPageState extends State<IMCPage> {
@@ -92,7 +96,7 @@ class _IMCPageState extends State<IMCPage> {
             ElevatedButton(
               onPressed: calcularIMC,
               style: AppTextStyles.buttonStyle,
-              child: Text("Calcular", style: AppTextStyles.buttonTextStyles),
+              child: Text("Calcular", style: AppTextStyles.buttonTextStyle),
             ),
             SizedBox(height: AppSpacing.spaceBetween),
             Text(resultado, style: AppTextStyles.resultTextStyle, textAlign: TextAlign.center),

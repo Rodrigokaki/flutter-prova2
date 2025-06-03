@@ -22,7 +22,7 @@ class AppTextStyles {
       minimumSize: Size(double.infinity, 50)
   );
 
-  static const buttonTextStyles = TextStyle(
+  static const buttonTextStyle = TextStyle(
     fontSize: 18,
     color: AppColors.secondaryColor,
   );
