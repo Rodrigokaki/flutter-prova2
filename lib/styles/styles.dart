@@ -7,8 +7,14 @@ class AppColors{
 
 class AppTextStyles {
   static const titleTextStyle = TextStyle(
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'BarberChop',
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const subtitleTextStyle = TextStyle(
+    fontSize: 24,
     color: AppColors.primaryColor,
     fontWeight: FontWeight.bold,
   );

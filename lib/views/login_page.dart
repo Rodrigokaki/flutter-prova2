@@ -62,7 +62,10 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: Center(child: Text(
+                'Calculadora IMC',
+                style: AppTextStyles.titleTextStyle,
+              ))),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Form(
@@ -75,9 +78,8 @@ class LoginPageState extends State<LoginPage> {
                 height: appSizes.iconSize,
               ),
               const SizedBox(height: AppSpacing.loginSpaceBetween),
-              const Text(
-                'Calculadora IMC',
-                style: AppTextStyles.titleTextStyle,
+              const Text('Login',
+                style: AppTextStyles.subtitleTextStyle,
               ),
               const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../styles/styles.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -9,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -18,8 +21,14 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Usuário registrado com sucesso')),
       );
-      Navigator.pop(context); // Volta para a tela de login
+      Navigator.pop(context);
     }
+  }
+
+  String? validateName(String? value) {
+    if (value == null || value.isEmpty) return 'Digite seu nome';
+    if (value.length < 3) return 'Nome deve ter pelo menos 3 caracteres';
+    return null;
   }
 
   String? validateEmail(String? value) {
@@ -41,28 +50,61 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Registrar')),
+      appBar: AppBar(title: Center(child: Text(
+                'Calculadora IMC',
+                style: AppTextStyles.titleTextStyle,
+              ))),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Form(
           key: formKey,
           child: Column(
             children: [
+              const SizedBox(height: AppSpacing.registerSpaceBetween),
+              Image.asset(
+                'assets/images/icon.png',
+                height: appSizes.iconSize,
+              ),
+              const SizedBox(height: AppSpacing.registerSpaceBetween),
+              const Text('Registrar',
+                style: AppTextStyles.subtitleTextStyle,
+              ),
+              const SizedBox(height: AppSpacing.registerSpaceBetween),
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  labelText: 'Nome',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                ),
+                validator: validateName,
+              ),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'E-mail'),
+                decoration: InputDecoration(
+                  labelText: 'E-mail',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                ),
                 validator: validateEmail,
               ),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'Senha'),
+                decoration: InputDecoration(
+                  labelText: 'Senha',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                ),
                 obscureText: true,
                 validator: validatePassword,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: register,
-                child: const Text('Registrar'),
+                style: defaultButtonStyle(),
+                child: const Text('Registrar', style: AppTextStyles.buttonTextStyle),
               ),
             ],
           ),

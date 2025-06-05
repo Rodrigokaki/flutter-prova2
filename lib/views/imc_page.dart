@@ -65,7 +65,7 @@ class _IMCPageState extends State<IMCPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Calculadora IMC"))),
+      appBar: AppBar(title: Center(child: Text("Calculadora IMC", style: AppTextStyles.titleTextStyle,))),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Column(
