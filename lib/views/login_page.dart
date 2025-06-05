@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prova2/styles/styles.dart';
 import '../database/database.dart';
 import 'imc_page.dart';
 import 'register_page.dart';
@@ -63,37 +64,49 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Form(
           key: formKey,
           child: Column(
             children: [
-              const SizedBox(height: 40),
-              const Icon(Icons.health_and_safety, size: 80, color: Colors.teal),
-              const SizedBox(height: 16),
-              const Text(
-                'IMC Calculator',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
+              Image.asset(
+                'assets/images/icon.png',
+                height: appSizes.iconSize,
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
+              const Text(
+                'Calculadora IMC',
+                style: AppTextStyles.titleTextStyle,
+              ),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                ),
                 validator: validadeEmail,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'Senha'),
+                decoration: InputDecoration(
+                  labelText: 'Senha',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                ),
                 obscureText: true,
                 validator: validatePassword,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               ElevatedButton(
                 onPressed: login,
-                child: const Text('Entrar'),
+                style: defaultButtonStyle(),
+                child: const Text('Entrar', style: AppTextStyles.buttonTextStyle),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -101,7 +114,10 @@ class LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (_) => const RegisterPage()),
                   );
                 },
-                child: const Text('Não tem conta? Cadastre-se aqui'),
+                child: const Text(
+                  'Não tem conta? Cadastre-se aqui',
+                  style: AppTextStyles.smallTextStyle
+                  ),
               ),
             ],
           ),

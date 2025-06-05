@@ -72,7 +72,7 @@ class _IMCPageState extends State<IMCPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(Icons.person, size: 130, color: AppColors.primaryColor),
-            SizedBox(height: AppSpacing.spaceBetween),
+            SizedBox(height: AppSpacing.imcSpaceBetween),
             TextField(
               controller: pesoController,
               keyboardType: TextInputType.number,
@@ -82,7 +82,7 @@ class _IMCPageState extends State<IMCPage> {
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: AppSpacing.spaceBetween),
+            SizedBox(height: AppSpacing.imcSpaceBetween),
             TextField(
               controller: alturaController,
               keyboardType: TextInputType.number,
@@ -92,13 +92,13 @@ class _IMCPageState extends State<IMCPage> {
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: AppSpacing.spaceBetween),
+            SizedBox(height: AppSpacing.imcSpaceBetween),
             ElevatedButton(
               onPressed: calcularIMC,
-              style: AppTextStyles.buttonStyle,
+              style: defaultButtonStyle(),
               child: Text("Calcular", style: AppTextStyles.buttonTextStyle),
             ),
-            SizedBox(height: AppSpacing.spaceBetween),
+            SizedBox(height: AppSpacing.imcSpaceBetween),
             Text(resultado, style: AppTextStyles.resultTextStyle, textAlign: TextAlign.center),
           ],
         ),

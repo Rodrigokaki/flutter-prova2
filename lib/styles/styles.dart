@@ -6,6 +6,18 @@ class AppColors{
 }
 
 class AppTextStyles {
+  static const titleTextStyle = TextStyle(
+    fontSize: 24,
+    fontFamily: 'BarberChop',
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const smallTextStyle = TextStyle(
+    fontSize: 16,
+    color: AppColors.primaryColor,
+  );
+
   static const resultTextStyle = TextStyle(
     fontSize: 18, 
     color: AppColors.primaryColor,
@@ -14,12 +26,7 @@ class AppTextStyles {
 
   static const inputLabelStyle = TextStyle(
     color: AppColors.primaryColor,
-    fontSize: 16,
-  );
-
-  static ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primaryColor,
-      minimumSize: Size(double.infinity, 50)
+    fontSize: 18,
   );
 
   static const buttonTextStyle = TextStyle(
@@ -28,8 +35,24 @@ class AppTextStyles {
   );
 }
 
+ButtonStyle defaultButtonStyle(){
+  return ElevatedButton.styleFrom(
+      backgroundColor: AppColors.primaryColor,
+      minimumSize: Size(double.infinity, 50)
+  );
+} 
+  
+
 class AppSpacing {
   static const double defaultPadding = 20.0;
-  static const double spaceBetween = 20;
+
+  static const double imcSpaceBetween = 20;
+
+  static const double loginSpaceBetween = 20;
+
+  static const double registerSpaceBetween = 20;
 }
 
+class appSizes {
+  static const double iconSize = 130;
+}
