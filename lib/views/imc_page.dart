@@ -16,7 +16,7 @@ class _IMCPageState extends State<IMCPage> {
   final alturaController = TextEditingController();
 
   String resultado = "Informe seus dados!";
-  
+
   String get saudacao {
     final hora = DateTime.now().hour;
     if (hora < 12) {
@@ -28,6 +28,8 @@ class _IMCPageState extends State<IMCPage> {
     }
   }
 
+  dynamic resultColor = ResultTextStyle.color;
+  
   void calcularIMC() {
     final peso = double.tryParse(pesoController.text);
     final alturaCm = double.tryParse(alturaController.text);
@@ -50,27 +52,37 @@ class _IMCPageState extends State<IMCPage> {
     final alturaM = alturaCm / 100;
     final imc = peso / (alturaM * alturaM);
 
+    Color newColor;
     String classificacao;
     if (imc < AppIMCValues.imcMagrezaGrave) {
       classificacao = "Magreza grave";
+      newColor = AppIMCColors.magrezaGrave;
     } else if (imc < AppIMCValues.imcMagrezaModerada) {
       classificacao = "Magreza moderada";
+      newColor = AppIMCColors.magrezaModerada;
     } else if (imc < AppIMCValues.imcMagrezaLeve) {
       classificacao = "Magreza leve";
+      newColor = AppIMCColors.magrezaLeve;
     } else if (imc <= AppIMCValues.imcPesoIdeal) {
       classificacao = "Peso ideal";
+      newColor = AppIMCColors.pesoIdeal;
     } else if (imc <= AppIMCValues.imcSobrepeso) {
       classificacao = "Sobrepeso";
+      newColor = AppIMCColors.sobrepeso;
     } else if (imc <= AppIMCValues.imcObesidade1) {
       classificacao = "Obesidade grau 1";
+      newColor = AppIMCColors.obesidade1;
     } else if (imc <= AppIMCValues.imcObesidade2) {
       classificacao = "Obesidade grau 2";
+      newColor = AppIMCColors.obesidade2;
     } else {
       classificacao = "Obesidade grau 3";
+      newColor = AppIMCColors.obesidade3;
     }
 
     setState(() {
       resultado = "IMC: ${imc.toStringAsFixed(2)} - $classificacao";
+      resultColor = newColor;
     });
   }
 
@@ -122,7 +134,11 @@ class _IMCPageState extends State<IMCPage> {
               child: Text("Calcular", style: AppTextStyles.buttonTextStyle),
             ),
             SizedBox(height: AppSpacing.imcSpaceBetween),
-            Text(resultado, style: AppTextStyles.resultTextStyle, textAlign: TextAlign.center),
+            Text(resultado, style: TextStyle(
+              fontSize: ResultTextStyle.fontSize,
+              color: resultColor,
+              fontWeight: ResultTextStyle.fontWeight,
+            ), textAlign: TextAlign.center),
           ],
         ),
       ),

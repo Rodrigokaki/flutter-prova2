@@ -24,12 +24,6 @@ class AppTextStyles {
     color: AppColors.primaryColor,
   );
 
-  static const resultTextStyle = TextStyle(
-    fontSize: 18, 
-    color: AppColors.primaryColor,
-    fontWeight: FontWeight.bold,
-  );
-
   static const inputLabelStyle = TextStyle(
     color: AppColors.primaryColor,
     fontSize: 18,
@@ -39,6 +33,12 @@ class AppTextStyles {
     fontSize: 18,
     color: AppColors.secondaryColor,
   );
+}
+
+class ResultTextStyle {
+  static const double fontSize = 18;
+  static const color = AppColors.primaryColor;
+  static const fontWeight = FontWeight.bold;
 }
 
 ButtonStyle defaultButtonStyle(){
