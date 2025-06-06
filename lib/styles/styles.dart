@@ -57,8 +57,12 @@ class AppSpacing {
   static const double loginSpaceBetween = 20;
 
   static const double registerSpaceBetween = 20;
+
+  static const double appBarSpaceBetween = 10;
 }
 
 class appSizes {
-  static const double iconSize = 130;
+  static const double homeIconSize = 130;
+
+  static const double appBarIconSize = 30;
 }

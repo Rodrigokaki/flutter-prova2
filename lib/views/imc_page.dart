@@ -14,7 +14,19 @@ class IMCPage extends StatefulWidget {
 class _IMCPageState extends State<IMCPage> {
   final pesoController = TextEditingController();
   final alturaController = TextEditingController();
+
   String resultado = "Informe seus dados!";
+  
+  String get saudacao {
+    final hora = DateTime.now().hour;
+    if (hora < 12) {
+      return "Bom dia";
+    } else if (hora < 18) {
+      return "Boa tarde";
+    } else {
+      return "Boa noite";
+    }
+  }
 
   void calcularIMC() {
     final peso = double.tryParse(pesoController.text);
@@ -65,12 +77,23 @@ class _IMCPageState extends State<IMCPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Calculadora IMC", style: AppTextStyles.titleTextStyle,))),
+      appBar: AppBar(title: Row(
+        spacing: AppSpacing.appBarSpaceBetween,
+        children: [
+        Text("Calculadora IMC", style: AppTextStyles.titleTextStyle),
+        Image.asset(
+                'assets/images/icon.png',
+                height: appSizes.appBarIconSize,
+        ),
+      ]),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Text('$saudacao, ${widget.name}!',style: AppTextStyles.subtitleTextStyle),
             Icon(Icons.person, size: 130, color: AppColors.primaryColor),
             SizedBox(height: AppSpacing.imcSpaceBetween),
             TextField(
