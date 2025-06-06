@@ -30,6 +30,9 @@ class LoginPageState extends State<LoginPage> {
         }
 
         if (user.password == passwordController.text) {
+          emailController.clear();
+          passwordController.clear();
+
           Navigator.push(
             context,
             MaterialPageRoute(
