@@ -17,7 +17,7 @@ class DatabaseHelper {
       join(await getDatabasesPath(), 'user_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE user(id INTEGER PRIMARY KEY AUTOINCREMENT, name Text, email TEXT, password TEXT)",
+          "CREATE TABLE user(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT, email TEXT, password TEXT)",
         );
       },
       version: 1,
@@ -55,12 +55,4 @@ class DatabaseHelper {
     }
     return null;
   }
-
-  // Future<List<User>> getAllUsers() async {
-  //   final db = await database;
-  //   final List<Map<String, dynamic>> result = await db!.query('user');
-  //   return List.generate(result.length, (i) {
-  //     return User.fromMap(result[i]);
-  //   });
-  // }
 }

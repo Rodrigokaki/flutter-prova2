@@ -22,7 +22,14 @@ class LoginPageState extends State<LoginPage> {
       try {
         final user = await databaseHelper.getUserByEmail(emailController.text);
 
-        if (user != null && user.password == passwordController.text) {
+        if (user == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Email ou senha inválidos')),
+          );
+          return;
+        }
+
+        if (user.password == passwordController.text) {
           Navigator.push(
             context,
             MaterialPageRoute(

@@ -14,6 +14,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
+  final surnameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final databaseHelper = DatabaseHelper();
@@ -23,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (formKey.currentState!.validate()) {
       final user = User(
         name: nameController.text,
+        surname: surnameController.text,
         email: emailController.text,
         password: passwordController.text,
       );
@@ -89,6 +91,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: OutlineInputBorder()
                 ),
                 validator: validateName,
+              ),
+              const SizedBox(height: AppSpacing.registerSpaceBetween),
+              TextFormField(
+                controller: surnameController,
+                decoration: InputDecoration(
+                  labelText: 'Sobrenome',
+                  labelStyle: AppTextStyles.inputLabelStyle,
+                  border: OutlineInputBorder()
+                )
               ),
               const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(

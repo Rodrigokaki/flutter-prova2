@@ -1,12 +1,14 @@
 class User {
   int? id;
   String name;
+  String surname;
   String email;
   String password;
 
   User({
     this.id,
     required this.name,
+    required this.surname,
     required this.email,
     required this.password,
   });
@@ -14,6 +16,7 @@ class User {
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'name': name,
+      'surname': surname,
       'email': email,
       'password': password,
     };
@@ -27,6 +30,7 @@ class User {
     return User(
       id: map['id'],
       name: map['name'],
+      surname: map['surname'] ?? '',
       email: map['email'],
       password: map['password'],
     );
