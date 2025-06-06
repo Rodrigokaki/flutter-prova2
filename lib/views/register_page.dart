@@ -20,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final databaseHelper = DatabaseHelper();
 
 
-  void register() {
+  void register() async {
     if (formKey.currentState!.validate()) {
       final user = User(
         name: nameController.text,
@@ -29,18 +29,34 @@ class _RegisterPageState extends State<RegisterPage> {
         password: passwordController.text,
       );
 
-      DatabaseHelper.instance.insertUser(user);
+      // Verifica se o e-mail já está cadastrado
+      await databaseHelper.getUserByEmail(user.email).then((existingUser) {
+        if (existingUser != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('E-mail já cadastrado')),
+          );
+        } 
+        else {
+          DatabaseHelper.instance.insertUser(user);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuário registrado com sucesso')),
-      );
-      Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Usuário registrado com sucesso')),
+          );
+          Navigator.pop(context);
+        }
+      });
     }
   }
 
   String? validateName(String? value) {
     if (value == null || value.isEmpty) return 'Digite seu nome';
     if (value.length < 3) return 'Nome deve ter pelo menos 3 caracteres';
+    return null;
+  }
+
+  String? validateSurname(String? value) {
+    if (value == null || value.isEmpty) return 'Digite seu sobrenome';
+    if (value.length < 3) return 'Sobrenome deve ter pelo menos 3 caracteres';
     return null;
   }
 
@@ -99,7 +115,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   labelText: 'Sobrenome',
                   labelStyle: AppTextStyles.inputLabelStyle,
                   border: OutlineInputBorder()
-                )
+                ),
+                validator: validateSurname,
               ),
               const SizedBox(height: AppSpacing.loginSpaceBetween),
               TextFormField(
