@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../database/database.dart';
+import '../models/user.dart';
 import '../styles/styles.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,10 +16,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final databaseHelper = DatabaseHelper();
+
 
   void register() {
     if (formKey.currentState!.validate()) {
-      // Aqui você pode adicionar a lógica para registrar o usuário
+      final user = User(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      DatabaseHelper.instance.insertUser(user);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Usuário registrado com sucesso')),
       );

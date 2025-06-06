@@ -15,7 +15,6 @@ class LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
   final databaseHelper = DatabaseHelper();
 
   void login() async {
