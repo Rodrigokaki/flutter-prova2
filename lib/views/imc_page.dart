@@ -98,6 +98,10 @@ class _IMCPageState extends State<IMCPage> {
     });
   }
 
+  void logout(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context,'/', (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +112,10 @@ class _IMCPageState extends State<IMCPage> {
         Image.asset(
                 'assets/images/icon.png',
                 height: appSizes.appBarIconSize,
+        ),
+        IconButton(
+          icon: Icon(Icons.logout, size: appSizes.appBarIconSize),
+          onPressed: () => logout(context),
         ),
       ]),
         centerTitle: true,
