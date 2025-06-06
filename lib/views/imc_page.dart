@@ -84,6 +84,18 @@ class _IMCPageState extends State<IMCPage> {
       resultado = "IMC: ${imc.toStringAsFixed(2)} - $classificacao";
       resultColor = newColor;
     });
+
+    pesoController.clear();
+    alturaController.clear();
+  }
+
+  void limparCampos() {
+    pesoController.clear();
+    alturaController.clear();
+    setState(() {
+      resultado = "Informe seus dados!";
+      resultColor = ResultTextStyle.color;
+    });
   }
 
   @override
@@ -132,6 +144,12 @@ class _IMCPageState extends State<IMCPage> {
               onPressed: calcularIMC,
               style: defaultButtonStyle(),
               child: Text("Calcular", style: AppTextStyles.buttonTextStyle),
+            ),
+            SizedBox(height: AppSpacing.imcSpaceBetween),
+            ElevatedButton(
+              onPressed: limparCampos,
+              style: defaultButtonStyle(),
+              child: Text("Limpar", style: AppTextStyles.buttonTextStyle),
             ),
             SizedBox(height: AppSpacing.imcSpaceBetween),
             Text(resultado, style: TextStyle(
