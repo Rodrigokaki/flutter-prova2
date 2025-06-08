@@ -105,7 +105,8 @@ class LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                   labelText: 'Senha',
                   labelStyle: AppTextStyles.inputLabelStyle,
-                  border: OutlineInputBorder()
+                  border: OutlineInputBorder(),
+                  errorMaxLines: 2
                 ),
                 obscureText: true,
                 validator: validatePassword,

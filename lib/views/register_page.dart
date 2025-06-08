@@ -133,7 +133,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   labelText: 'Senha',
                   labelStyle: AppTextStyles.inputLabelStyle,
-                  border: OutlineInputBorder()
+                  border: OutlineInputBorder(),
+                  errorMaxLines: 2
                 ),
                 obscureText: true,
                 validator: validatePassword,
