@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(title: Text('Calculadora IMC',style: AppTextStyles.titleTextStyle),
         centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Form(
           key: formKey,

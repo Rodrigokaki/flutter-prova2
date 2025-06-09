@@ -120,7 +120,7 @@ class _IMCPageState extends State<IMCPage> {
       ]),
         centerTitle: true,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
